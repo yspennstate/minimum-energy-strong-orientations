@@ -13,7 +13,7 @@
 \numberwithin{equation}{section}
 \hyphenation{Vo-ro-noi}
 \DeclareMathOperator{\dist}{dist}
-\newcommand{\Emin}{E_{\min}}
+\newcommand{\Emin}{\mathcal E_{\min}}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\R}{\mathbb R}
 
@@ -39,11 +39,11 @@ Let $G=(V,E)$ be a finite connected graph without loops; parallel edges are allo
 
 For an orientation $D$ of $G$ let $d^{\mathrm{out}}_u$ and $d^{\mathrm{in}}_u$ be the out-degree and the in-degree of $u\in V$, and let $f_D\colon V\to\R$ solve the Laplacian equation $\Delta f_D=d^{\mathrm{out}}-d^{\mathrm{in}}$, where $\Delta f(u)=\sum_{v\sim u}(f(u)-f(v))$ with multiplicity. The \emph{energy} of $D$ is
 \[
-E(D)=\langle f_D,\Delta f_D\rangle=\sum_{u\in V}f_D(u)\bigl(d^{\mathrm{out}}_u-d^{\mathrm{in}}_u\bigr),
+\mathcal E(D)=\langle f_D,\Delta f_D\rangle=\sum_{u\in V}f_D(u)\bigl(d^{\mathrm{out}}_u-d^{\mathrm{in}}_u\bigr),
 \]
 which does not depend on the choice of the solution $f_D$. By Robbins' theorem \cite{Robbins39}, $G$ has a strongly connected orientation, also called a strong orientation, exactly when it is bridgeless; write $\Emin(G)$ for the least energy of a strongly connected orientation of a bridgeless graph $G$ with $m$ edges. Amini expressed the squared covering radius of $\Lambda(G)$ as an affine function of $\Emin(G)$ \cite[Definition--Theorem~14]{Amini}; it equals $(m-\Emin(G))/4$ (Corollary~\ref{cor:radius}). Amini wrote that the complexity of finding a strongly connected orientation of least energy is not known, and that he suspected it to be NP-hard \cite[\S4]{Amini}.
 
-A lattice $L\subset\R^n$ is regular if the support of every nonzero vector contains the support of an elementary vector, a nonzero vector of $L$ with entries in $\{0,\pm1\}$ and minimal support. Dutour Sikiri\'c, Sch\"urmann and Vallentin \cite[Theorem~2]{DSV09} showed that the Voronoi cell of a regular lattice is the orthogonal projection of the cube $[-1/2,1/2]^n$ onto the span of $L$. They gave a formula for the covering radius of the lattice of integer cuts of a graph \cite[Proposition~3]{DSV09} and remarked after it that a combinatorial interpretation of the formula could lead to a proof that the covering radius problem is NP-hard. Vallentin has since shown that the covering radius problem for general Euclidean lattices is complete for the second level of the polynomial hierarchy \cite{Vallentin26}.
+A lattice $L\subset\R^n$ is regular if the support of every nonzero vector contains the support of an elementary vector, a nonzero vector of $L$ with entries in $\{0,\pm1\}$ and minimal support. Dutour Sikiri\'c, Sch\"urmann and Vallentin \cite[Theorem~2]{DSV09} showed that the Voronoi cell of a regular lattice is the orthogonal projection of the cube $[-1/2,1/2]^n$ onto the span of $L$. They gave a formula for the covering radius of the lattice of integer cuts of a graph \cite[Proposition~3]{DSV09} and remarked after it that a combinatorial interpretation of the formula could lead to a proof that the covering radius problem is NP-hard. Their main theorem \cite[Theorem~1]{DSV09} is that counting the vertices of the Voronoi cell of a lattice of integer cuts is \#P-hard, through the bijection between these vertices and the acyclic orientations of the graph; the covering radius asks instead for the vertex of largest norm. For general lattices, Guruswami, Micciancio and Regev showed that approximating the covering radius within a factor $2$ is in AM \cite{GMR05}, Haviv and Regev showed that approximating it within some constant factor is $\Pi_2$-hard in the $\ell_p$ norm for every sufficiently large $p$ and for $p=\infty$ \cite{HR06}, and Vallentin has shown that the covering radius problem for Euclidean lattices is complete for the second level of the polynomial hierarchy \cite{Vallentin26}.
 
 Deciding whether $\Emin(G)\le r$ is deciding whether the squared covering radius of $\Lambda(G)$ is at least $(m-r)/4$. Vallentin's theorem does not reach the lattices of graphs: for $\Lambda(G)$ a vertex of the Voronoi cell far from the origin is a short certificate, so deciding whether the squared covering radius is at most $r$ lies in coNP. $\Lambda(G)$ is the integer kernel of the totally unimodular incidence matrix, so its closest vector problem is solvable in polynomial time~\cite{MPSV21}, and that algorithm does not decide the covering radius.
 
@@ -75,7 +75,7 @@ Deciding, for a graph $G$ and a rational number $r$, whether the squared coverin
 \end{cor}
 
 \begin{thm}\label{thm:fptas}
-For each fixed $\omega$ there is an algorithm that, given a bridgeless loopless graph $G$ of treewidth at most $\omega$ with $m$ edges and a rational $0<\varepsilon\le1$, returns in time polynomial in $m$ and $1/\varepsilon$ a strongly connected orientation $D$ of $G$ with $E(D)\le(1+\varepsilon)\Emin(G)$ and a rational $\ell$ with $(1-\varepsilon)\Emin(G)\le\ell\le\Emin(G)$.
+For each fixed $\omega$ there is an algorithm that, given a bridgeless loopless graph $G$ of treewidth at most $\omega$ with $m$ edges and a rational $0<\varepsilon\le1$, returns in time polynomial in $m$ and $1/\varepsilon$ a strongly connected orientation $D$ of $G$ with $\mathcal E(D)\le(1+\varepsilon)\Emin(G)$ and a rational $\ell$ with $(1-\varepsilon)\Emin(G)\le\ell\le\Emin(G)$.
 \end{thm}
 
 The reduction of Theorem~\ref{thm:hard} separates its two cases by an amount exponentially small compared with the energies involved. Unless $\mathrm{P}=\mathrm{NP}$ this cannot be avoided at bounded treewidth: if the two cases always differed by a fraction of the energy at least the inverse of a polynomial, Theorem~\ref{thm:fptas} with $\varepsilon$ that small would decide them in polynomial time.
@@ -84,14 +84,14 @@ Section~\ref{sec:prelim} recasts the energy as a squared distance and shows that
 
 \section{Energy as a distance}\label{sec:prelim}
 
-Fix a reference orientation of $G$ and let $N\in\R^{E\times V}$ be the incidence matrix, with $N_{e,u}=1$ and $N_{e,v}=-1$ for $e=(u,v)$. An orientation is a sign vector $s\in\{\pm1\}^E$, with $s_e=1$ when $e$ keeps its reference direction, and $E(s)$ is its energy. Then $N^{\top}s=d^{\mathrm{out}}-d^{\mathrm{in}}$ and $N^{\top}N=\Delta$. Let $\Delta^{+}$ be the Moore--Penrose pseudoinverse of $\Delta$, let $P=N\Delta^{+}N^{\top}$ be the orthogonal projection onto the space of tensions $\operatorname{im}N$, and let $C=I-P$, the projection onto the space of circulations $\ker N^{\top}$ of the introduction.
+Fix a reference orientation of $G$ and let $N\in\R^{E\times V}$ be the incidence matrix, with $N_{e,u}=1$ and $N_{e,v}=-1$ for $e=(u,v)$. An orientation is a sign vector $s\in\{\pm1\}^E$, with $s_e=1$ when $e$ keeps its reference direction, and $\mathcal E(s)$ is its energy. Then $N^{\top}s=d^{\mathrm{out}}-d^{\mathrm{in}}$ and $N^{\top}N=\Delta$. Let $\Delta^{+}$ be the Moore--Penrose pseudoinverse of $\Delta$, let $P=N\Delta^{+}N^{\top}$ be the orthogonal projection onto the space of tensions $\operatorname{im}N$, and let $C=I-P$, the projection onto the space of circulations $\ker N^{\top}$ of the introduction.
 
 \begin{lem}\label{lem:energy}
-For every orientation $s$, $E(s)=\|Ps\|^2=m-\|Cs\|^2$.
+For every orientation $s$, $\mathcal E(s)=\|Ps\|^2=m-\|Cs\|^2$.
 \end{lem}
 
 \begin{proof}
-With $f=\Delta^{+}N^{\top}s$ we have $\Delta f=N^{\top}s$ and $E(s)=\langle f,N^{\top}s\rangle=s^{\top}N\Delta^{+}N^{\top}s=\|Ps\|^2$. Since $\|s\|^2=m$ and $P+C=I$ with orthogonal ranges, $\|Ps\|^2=m-\|Cs\|^2$.
+With $f=\Delta^{+}N^{\top}s$ we have $\Delta f=N^{\top}s$ and $\mathcal E(s)=\langle f,N^{\top}s\rangle=s^{\top}N\Delta^{+}N^{\top}s=\|Ps\|^2$. Since $\|s\|^2=m$ and $P+C=I$ with orthogonal ranges, $\|Ps\|^2=m-\|Cs\|^2$.
 \end{proof}
 
 \begin{lem}\label{lem:strong}
@@ -112,7 +112,7 @@ The squared covering radius of $\Lambda(G)$ is the largest of the numbers $\|Cs\
 The cell $C([-1/2,1/2]^E)$ contains every point $Cs/2$ and its vertices are among them, so the squared covering radius, the largest squared norm of a point of the cell, is $\max_s\|Cs\|^2/4$. For bridgeless $G$ this is $(m-\Emin(G))/4$ by Lemma~\ref{lem:strong}.
 \end{proof}
 
-In the proof of \cite[Lemma~13]{Amini} the coordinate $v^D_e$ on an arc $e=(u,v)$ of $D$ is written $f_D(v)-f_D(u)+1$; with the value $(f_D(v)-f_D(u)+1)/2$ the same computation gives $\|v^D\|^2=(m-E(D))/4$, so \cite[Definition--Theorem~14]{Amini} holds with $1/4$ in place of $1/2$. For a cycle of length $n$ the value $(m-\Emin(G))/4$ is $n/4$, the squared distance from $\tfrac12(1,\dots,1)$ to the lattice $\Z(1,\dots,1)$.
+In the proof of \cite[Lemma~13]{Amini} the coordinate $v^D_e$ on an arc $e=(u,v)$ of $D$ is written $f_D(v)-f_D(u)+1$; with the value $(f_D(v)-f_D(u)+1)/2$ the same computation gives $\|v^D\|^2=(m-\mathcal E(D))/4$, so \cite[Definition--Theorem~14]{Amini} holds with $1/4$ in place of $1/2$. For a cycle of length $n$ the value $(m-\Emin(G))/4$ is $n/4$, the squared distance from $\tfrac12(1,\dots,1)$ to the lattice $\Z(1,\dots,1)$.
 
 \begin{lem}\label{lem:lower}
 Let $G$ be bridgeless and let $v$ be a vertex of odd degree. Then $\Emin(G)\ge1/\deg(v)$.
@@ -214,11 +214,11 @@ The vector $Kx$ is a circulation, and since the incidence matrix is totally unim
 \[
 J=\min\Bigl\{\sum_e\bigl(|z'_e|/K-1\bigr)^2:\ z'\in\Z^E\ \text{a circulation},\ 1\le|z'_e|\le T\Bigr\}.
 \]
-For a feasible $z'$ let $s'=\operatorname{sign}(z')$. Then $\sum_e(|z'_e|/K-1)^2=\|s'-z'/K\|^2\ge\|Ps'\|^2=E(s')$, because $z'/K$ is a circulation; and $s'$ is strongly connected, because $z'$ is a circulation positive on every arc of $s'$ (as in the proof of Lemma~\ref{lem:strong}). For the rounded $z$, the vector $s-x$ is a tension and $x-z/K$ a circulation, so
+For a feasible $z'$ let $s'=\operatorname{sign}(z')$. Then $\sum_e(|z'_e|/K-1)^2=\|s'-z'/K\|^2\ge\|Ps'\|^2=\mathcal E(s')$, because $z'/K$ is a circulation; and $s'$ is strongly connected, because $z'$ is a circulation positive on every arc of $s'$ (as in the proof of Lemma~\ref{lem:strong}). For the rounded $z$, the vector $s-x$ is a tension and $x-z/K$ a circulation, so
 \[
 \|s-z/K\|^2=\|s-x\|^2+\|x-z/K\|^2\le M+m/K^2\le(1+\varepsilon)M,
 \]
-using $m/K^2\le\varepsilon/m\le\varepsilon M$. Hence an optimal $z'$ for $J$ gives a strongly connected orientation $D$ with $M\le E(D)\le J\le(1+\varepsilon)M$. Put $\ell=\max(1/m,\,J-m/K^2)$. Then $J-m/K^2\le\|s-z/K\|^2-m/K^2\le M$ and $J-m/K^2\ge M-\varepsilon M$, so $(1-\varepsilon)M\le\ell\le M$. The energy $E(D)$ is computed exactly by a rational linear solve.
+using $m/K^2\le\varepsilon/m\le\varepsilon M$. Hence an optimal $z'$ for $J$ gives a strongly connected orientation $D$ with $M\le \mathcal E(D)\le J\le(1+\varepsilon)M$. Put $\ell=\max(1/m,\,J-m/K^2)$. Then $J-m/K^2\le\|s-z/K\|^2-m/K^2\le M$ and $J-m/K^2\ge M-\varepsilon M$, so $(1-\varepsilon)M\le\ell\le M$. The energy $\mathcal E(D)$ is computed exactly by a rational linear solve.
 
 It remains to compute $J$ and an optimal $z'$. Compute a tree decomposition of width at most $\omega$ in linear time \cite{Bodlaender96}. Assign every edge to one bag containing both ends, and process the decomposition from the leaves, keeping for each bag a table indexed by the vector of net flows out of its vertices from the edges assigned so far, each entry the least partial cost $\sum(|z'_e|-K)^2$ together with a witness. An edge is introduced by trying the $2T$ values of $z'_e$; a vertex is forgotten only with net flow $0$; the tables of the children of a bag are combined one at a time by adding the vectors of net flows and the costs. Every net flow lies in $[-mT,mT]$, so each table has at most $(2mT+1)^{\omega+1}$ entries and each step takes time polynomial in $m$ and $(2mT+1)^{\omega+1}$. At the root the entry with all net flows $0$ is $K^2J$. Since $T\le 2m^{3/2}/\sqrt\varepsilon+3\sqrt m$, the total time is polynomial in $m$ and $1/\varepsilon$ for fixed $\omega$.
 \end{proof}
@@ -250,7 +250,7 @@ The author holds equity in Heights Labs and in Convex Nexus Capital and has a ma
 
 \section*{Data availability}
 The program \texttt{check\_triangle\_ring.py}, which uses only Python's standard library, computes the values of Example~\ref{ex:small} from the definition, in exact rational arithmetic, over the orientations that are constant on each subdivided path; for the first graph of Example~\ref{ex:small} it also runs over all $2^{18}$ orientations. It and its output are in the repository
-\begin{center}\url{https://github.com/yspennstate/minimum-energy-strong-orientations/tree/v1.6}.\end{center}
+\begin{center}\url{https://github.com/yspennstate/minimum-energy-strong-orientations/tree/v1.7}.\end{center}
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 The AI agents Claude (Anthropic) and Codex (OpenAI), working through Math Brain~\cite{MathBrainRepo,MathBrainPaper} on the Brain framework~\cite{BrainFramework}, produced the statements, proofs and computations of this paper under the author's direction. The question is Amini's~\cite{Amini}. The description of the Voronoi cell through strongly connected orientations is his, and the description of Voronoi cells of regular lattices as projected cubes is due to Dutour Sikiri\'c, Sch\"urmann and Vallentin~\cite{DSV09}. The reduction starts from the theorem of Darmann and D\"ocker~\cite{DD20}. The lattice of integer flows was studied earlier by Bacher, de la Harpe and Nagnibeda~\cite{BHN97}. The description of its Voronoi cell was conjectured by Caporaso and Viviani~\cite{CV10} and extended to regular matroids by Dancso and Lim~\cite{DL22}. The hardness of the covering radius problem for general lattices is due to Vallentin~\cite{Vallentin26}. The hardness results for acyclic orientations recalled in the introduction are due to Borradaile, Iglesias, Migler, Ochoa, Wilfong and Zhang~\cite{BIMOWZ17} and to Borsik and Madarasi~\cite{BM25}, and the polynomial-time algorithm for the closest vector problem recalled there is due to McCormick, Peis, Scheidweiler and Vallentin~\cite{MPSV21}. The values of Example~\ref{ex:small} were computed with the program named in the data availability statement. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
@@ -265,7 +265,9 @@ The AI agents Claude (Anthropic) and Codex (OpenAI), working through Math Brain~
 \bibitem{DL22} Z.~Dancso and J.~Lim, Lattice of integer flows and the poset of strongly connected orientations for regular matroids, \emph{Discrete Math.} \textbf{346} (2023), 113589, \doi{10.1016/j.disc.2023.113589}; arXiv:2202.13265.
 \bibitem{DD20} A.~Darmann and J.~D\"ocker, On a simple hard variant of Not-All-Equal 3-Sat, \emph{Theoret. Comput. Sci.} \textbf{815} (2020), 147--152, \doi{10.1016/j.tcs.2020.02.010}.
 \bibitem{DSV09} M.~Dutour Sikiri\'c, A.~Sch\"urmann and F.~Vallentin, Complexity and algorithms for computing Voronoi cells of lattices, \emph{Math. Comp.} \textbf{78} (2009), 1713--1731, \doi{10.1090/S0025-5718-09-02224-8}.
+\bibitem{GMR05} V.~Guruswami, D.~Micciancio and O.~Regev, The complexity of the covering radius problem, \emph{Comput. Complexity} \textbf{14} (2005), 90--121, \doi{10.1007/s00037-005-0193-y}.
 \bibitem{GR01} C.~Godsil and G.~Royle, \emph{Algebraic Graph Theory}, Graduate Texts in Mathematics 207, Springer, New York, 2001.
+\bibitem{HR06} I.~Haviv and O.~Regev, Hardness of the covering radius problem on lattices, \emph{Chicago J. Theoret. Comput. Sci.} (2012), Article~4; conference version in \emph{Proc. 21st IEEE Conference on Computational Complexity} (2006).
 \bibitem{MPSV21} S.~T. McCormick, B.~Peis, R.~Scheidweiler and F.~Vallentin, A polynomial time algorithm for solving the closest vector problem in zonotopal lattices, \emph{SIAM J. Discrete Math.} \textbf{35} (2021), 2345--2356, \doi{10.1137/20M1382258}.
 \bibitem{Robbins39} H.~E. Robbins, A theorem on graphs, with an application to a problem of traffic control, \emph{Amer. Math. Monthly} \textbf{46} (1939), 281--283, \doi{10.2307/2303897}.
 \bibitem{RS62} J.~B. Rosser and L.~Schoenfeld, Approximate formulas for some functions of prime numbers, \emph{Illinois J. Math.} \textbf{6} (1962), 64--94, \doi{10.1215/ijm/1255631807}.
