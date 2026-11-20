@@ -1,0 +1,10 @@
+ring [(1, 3), (1, 3), (1, 3)] edges 18 orientations 262144 (all)
+  least energy, all orientations: 2
+  least energy, strongly connected among all orientations: 2
+  closed form W - 4U + 4 rho^2/S: 2  rho = 0
+  match: True
+ring [(1, 3), (1, 3), (1, 5)] edges 26 orientations 512 (constant on each path)
+  least energy, orientations constant on each path: 34/13
+  least energy, strongly connected among orientations constant on each path: 34/13
+  closed form W - 4U + 4 rho^2/S: 34/13  rho = 2/15
+  match: True
