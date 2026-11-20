@@ -35,51 +35,56 @@ For an orientation of a finite graph, let $f$ solve $\Delta f=d^{\mathrm{out}}-d
 
 \section{Introduction}
 
-Let $G=(V,E)$ be a finite connected graph without loops; parallel edges are allowed. The lattice of integer flows $\Lambda(G)$ is the set of integer-valued circulations in $\Z^E$, with the inner product inherited from $\R^E$. Bacher, de la Harpe and Nagnibeda \cite{BHN97} studied this lattice and the lattice of integer cuts. Amini \cite[Theorem~1]{Amini} showed that the face poset of the Voronoi cell of $\Lambda(G)$ is isomorphic to the poset of strongly connected orientations of subgraphs of $G$, as conjectured by Caporaso and Viviani \cite{CV10}; Dancso and Lim \cite{DL22} extended this description to regular matroids. In particular the vertices of the Voronoi cell are points $v^D$ attached to the strongly connected orientations $D$ of $G$ \cite[Lemma~8]{Amini}, and the squared covering radius of $\Lambda(G)$ is the largest of their squared norms \cite[Proposition~12]{Amini}. He then expressed it through the following quantity.
+Let $G=(V,E)$ be a finite connected graph without loops; parallel edges are allowed. The lattice of integer flows $\Lambda(G)$ is the set of integer-valued circulations in $\Z^E$, with the inner product inherited from $\R^E$. Bacher, de la Harpe and Nagnibeda \cite{BHN97} studied this lattice and the lattice of integer cuts. Amini \cite[Theorem~1]{Amini} showed that the face poset of the Voronoi cell of $\Lambda(G)$ is isomorphic to the poset of strongly connected orientations of subgraphs of $G$, as conjectured by Caporaso and Viviani \cite{CV10}; Dancso and Lim \cite{DL22} extended this description to regular matroids. In particular the vertices of the Voronoi cell are points $v^D$ attached to the strongly connected orientations $D$ of $G$ \cite[Lemma~8]{Amini}, and the squared covering radius of $\Lambda(G)$ is the largest of their squared norms \cite[Proposition~12]{Amini}. Amini then expressed it through the following quantity.
 
 For an orientation $D$ of $G$ let $d^{\mathrm{out}}_y$ and $d^{\mathrm{in}}_y$ be the out-degree and the in-degree of $y\in V$, and let $f_D\colon V\to\R$ solve the Laplacian equation $\Delta f_D=d^{\mathrm{out}}-d^{\mathrm{in}}$, where $\Delta f(y)=\sum_{z\sim y}(f(y)-f(z))$ with multiplicity. The \emph{energy} of $D$ is
 \[
 E(D)=\langle f_D,\Delta f_D\rangle=\sum_{y\in V}f_D(y)\bigl(d^{\mathrm{out}}_y-d^{\mathrm{in}}_y\bigr),
 \]
-which does not depend on the choice of the solution $f_D$. By Robbins' theorem \cite{Robbins39}, $G$ has a strongly connected orientation, also called a strong orientation, exactly when it is bridgeless; write $\Emin(G)$ for the least energy of a strongly connected orientation of a bridgeless graph $G$ with $m$ edges. Amini expressed the squared covering radius of $\Lambda(G)$ as an affine function of $\Emin(G)$ \cite[Definition--Theorem~14]{Amini}; it equals $(m-\Emin(G))/4$ (Corollary~\ref{cor:radius}). Amini wrote that the complexity of finding a strongly connected orientation of least energy is not known, and that he suspected it to be NP-hard \cite[\S4]{Amini}.
+which does not depend on the choice of the solution $f_D$. By Robbins' theorem \cite{Robbins39}, $G$ has a strongly connected orientation, also called a strong orientation, exactly when it is bridgeless; write $\Emin(G)$ for the least energy of a strongly connected orientation of a bridgeless graph $G$ with $m$ edges. Amini expressed the squared covering radius of $\Lambda(G)$ as an affine function of $\Emin(G)$ \cite[Definition--Theorem~14]{Amini}; with the constant corrected after Corollary~\ref{cor:radius}, it equals $(m-\Emin(G))/4$. Amini wrote that the complexity of finding a strongly connected orientation of least energy is not known, and that he suspected it to be NP-hard \cite[\S4]{Amini}.
 
 A lattice $L\subset\R^n$ is regular if the support of every nonzero vector contains the support of an elementary vector, a nonzero vector of $L$ with entries in $\{0,\pm1\}$ and minimal support. Dutour Sikiri\'c, Sch\"urmann and Vallentin \cite[Theorem~2]{DSV09} showed that the Voronoi cell of a regular lattice is the orthogonal projection of the cube $[-1/2,1/2]^n$ onto the span of $L$. They gave a formula for the covering radius of the lattice of integer cuts of a graph \cite[Proposition~3]{DSV09} and remarked after it that a combinatorial interpretation of the formula could lead to a proof that the covering radius problem is NP-hard. Vallentin has since shown that the covering radius problem for general Euclidean lattices is complete for the second level of the polynomial hierarchy \cite{Vallentin26}.
 
-By Corollary~\ref{cor:radius}, deciding whether $\Emin(G)\le r$ is deciding whether the squared covering radius of $\Lambda(G)$ is at least $(m-r)/4$, and the results above settle neither question. Vallentin's theorem~\cite{Vallentin26} concerns general Euclidean lattices, while $\Lambda(G)$ is the integer kernel of the incidence matrix of $G$, which is totally unimodular, so its closest vector problem is solvable in polynomial time~\cite{MPSV21}; such an algorithm does not by itself decide the covering radius. Write an orientation as a sign vector $s\in\{\pm1\}^E$ and let $C$ be the orthogonal projection of $\R^E$ onto the space of circulations. The lattice $\Lambda(G)$ is regular (Section~\ref{sec:prelim}), so its Voronoi cell is $C([-1/2,1/2]^E)$~\cite[Theorem~2]{DSV09}, and with Amini's description of its vertices this gives
+The squared covering radius of $\Lambda(G)$ equals $(m-\Emin(G))/4$ (Corollary~\ref{cor:radius}; \cite[Proposition~12, Definition--Theorem~14]{Amini}), so deciding whether $\Emin(G)\le r$ is deciding whether that radius is at least $(m-r)/4$. Amini left the complexity of $\Emin$ open and suspected it to be NP-hard \cite[\S4]{Amini}. Dutour Sikiri\'c, Sch\"urmann and Vallentin expected a combinatorial reading of their formula for lattices of integer cuts to give hardness \cite[Proposition~3]{DSV09}. Vallentin's theorem~\cite{Vallentin26} does not reach these lattices. $\Lambda(G)$ is the integer kernel of the totally unimodular incidence matrix, so its closest vector problem is solvable in polynomial time~\cite{MPSV21}, and that algorithm does not decide the covering radius.
+
+Write an orientation as a sign vector $s\in\{\pm1\}^E$ and let $C$ be the orthogonal projection of $\R^E$ onto the space of circulations. Since $\Lambda(G)$ is regular, its Voronoi cell is $C([-1/2,1/2]^E)$~\cite[Theorem~2]{DSV09}, and with Amini's description of its vertices
 \[
 \Emin(G)=m-\max_{s\in\{\pm1\}^E}\|Cs\|^2 .
 \]
-By Lemma~\ref{lem:strong}, every maximizer $s$ is strongly connected, and $s_e(Cs)_e\ge C_{ee}>0$ for every edge $e$, where $C_{ee}$ is the diagonal entry of $C$; Section~\ref{sec:fptas} uses this inequality. The constraint of strong connectivity therefore disappears, and the new step is a family of planar graphs on which the maximum has a closed form. Let the ring $G_0$ be a cycle $u_1\cdots u_k$ with a triangle $u_iu'_iu_{i+1}$ on each edge, where $u_iu_{i+1}$ has weight $2A_i$, the edges $u_iu'_i$ and $u'_iu_{i+1}$ have weight $2(B_i-2A_i)$, and $0<A_i<B_i/2$ are integers. Let $H$ be the plane dual of $G_0$ with each edge replaced by a path whose length is its weight (Section~\ref{sec:hard}). Then (Proposition~\ref{prop:ring})
+Every maximizer is a strongly connected orientation (Lemma~\ref{lem:strong}), so the maximum may be taken over all orientations. On the following planar graphs it has a closed form. Given integers $0<A_i<B_i/2$ for $i=1,\dots,k$, let $H$ have two vertices $o_{\mathrm{in}}$, $o_{\mathrm{out}}$ and vertices $h_1,\dots,h_k$. Each $h_i$ is joined to $o_{\mathrm{in}}$ by a path with $2A_i$ edges and to $o_{\mathrm{out}}$ by two paths with $2(B_i-2A_i)$ edges each. Then (Proposition~\ref{prop:ring})
 \[
 \Emin(H)=W-4U+\frac{4\rho^2}{S},\qquad \rho=\min_{\sigma\in\{\pm1\}^k}\dist\Bigl(\sum_{i=1}^k\sigma_i\frac{A_i}{B_i},\ \Z\Bigr),
 \]
-where $W$ is the number of edges of $H$, $U=\sum_i(B_i-2A_i+A_i^2/B_i)$ and $S=\sum_i1/B_i$. The least energy of $H$ thus measures how close a signed sum of the fractions $A_i/B_i$ can come to an integer. Add a new variable to every clause of a monotone not-all-equal formula, assign to the $j$-th clause the $j$-th prime $p_j$ larger than $10$, and let $A_i/B_i$ be the sum of $1/p_j$ over the clauses containing the $i$-th variable. Then $\rho=0$ if the formula is satisfiable and $\rho\ge1/Q$ otherwise, where $Q$ is the product of the primes (Lemma~\ref{lem:signed}). In the variant of Darmann and D\"ocker~\cite{DD20} every variable occurs in four clauses, which keeps the denominators $B_i$, and hence $H$, of polynomial size.
+where $W$ is the number of edges of $H$, $U=\sum_i(B_i-2A_i+A_i^2/B_i)$ and $S=\sum_i1/B_i$. The least energy of $H$ thus measures how close a signed sum of the fractions $A_i/B_i$ comes to an integer. Take a monotone not-all-equal formula in which every clause has three variables and every variable occurs in four clauses; deciding its satisfiability is NP-complete~\cite{DD20}. Add a new variable to each clause and give the $j$-th clause the $j$-th prime $p_j$ larger than $10$. Let $A_i/B_i$ be the sum of $1/p_j$ over the clauses containing the $i$-th variable. Then $\rho=0$ when the formula is satisfiable and $\rho\ge1/Q$ otherwise, where $Q=p_1\cdots p_q$ (Lemma~\ref{lem:signed}). Since every variable occurs in at most four clauses, $B_i\le p_q^4$, and $H$ has polynomial size.
 
 Other objectives over orientations have been studied: minimizing the lexicographic order of the indegrees over acyclic orientations is NP-hard \cite{BIMOWZ17}, and so is minimizing $\sum_v\varphi(d^{\mathrm{in}}(v))$ over acyclic orientations for every fixed convex function $\varphi$ that is not linear on the positive integers \cite{BM25}. Both objectives are separable functions of the indegrees minimized over acyclic orientations, while $E(D)$ couples all edges through the Laplacian and is minimized over strongly connected orientations.
 
-The decision problem is: given $G$ and a rational number $r$, is there a strongly connected orientation of $G$ of energy at most $r$?
+The decision problem is the following.
+\begin{quote}
+Given a bridgeless graph $G$ and a rational number $r$, is there a strongly connected orientation of $G$ of energy at most $r$?
+\end{quote}
 
 \begin{thm}\label{thm:hard}
 The decision problem is NP-complete, even when $G$ is a simple bridgeless bipartite planar graph from which deleting one vertex leaves a tree. In particular it is NP-complete on graphs of treewidth two.
 \end{thm}
 
-For lattices coming from graphs, deciding whether the squared covering radius is at most $r$ lies in coNP, since a vertex of the Voronoi cell far from the origin is a short certificate, and Theorem~\ref{thm:hard} shows that it is hard there.
+For lattices coming from graphs, deciding whether the squared covering radius is at most $r$ lies in coNP, since a vertex of the Voronoi cell far from the origin is a short certificate, and Theorem~\ref{thm:hard} shows that it is coNP-hard for them.
 
 \begin{cor}\label{cor:cov}
 Deciding, for a graph $G$ and a rational number $r$, whether the squared covering radius of $\Lambda(G)$ is at most $r$ is coNP-complete, even for the graphs of Theorem~\ref{thm:hard}. The same holds for lattices of integer cuts of graphs, even of planar graphs.
 \end{cor}
 
-The reduction produces gaps that are exponentially small compared with the energies involved, and unless $\mathrm{P}=\mathrm{NP}$ this cannot be avoided at bounded treewidth.
-
 \begin{thm}\label{thm:fptas}
 For each fixed $\omega$ there is an algorithm that, given a bridgeless loopless graph $G$ of treewidth at most $\omega$ with $m$ edges and a rational $0<\varepsilon\le1$, returns in time polynomial in $m$ and $1/\varepsilon$ a strongly connected orientation $D$ of $G$ with $E(D)\le(1+\varepsilon)\Emin(G)$ and a rational $\ell$ with $(1-\varepsilon)\Emin(G)\le\ell\le\Emin(G)$.
 \end{thm}
 
-Section~\ref{sec:prelim} recasts the energy as a squared distance and shows that the strong connectivity constraint can be dropped. Section~\ref{sec:hard} proves Theorem~\ref{thm:hard}, by a reduction from a variant of not-all-equal 3-satisfiability that Darmann and D\"ocker proved NP-complete \cite{DD20}, and Corollary~\ref{cor:cov}, and Section~\ref{sec:fptas} proves Theorem~\ref{thm:fptas}. Section~\ref{sec:open} lists questions that remain open.
+The reduction of Theorem~\ref{thm:hard} separates its two cases by an amount exponentially small compared with the energies involved. Unless $\mathrm{P}=\mathrm{NP}$ this cannot be avoided at bounded treewidth: if the two cases always differed by a fraction of the energy at least the inverse of a polynomial, Theorem~\ref{thm:fptas} with $\varepsilon$ that small would decide them in polynomial time.
+
+Section~\ref{sec:prelim} recasts the energy as a squared distance and shows that the strong connectivity constraint can be dropped. Section~\ref{sec:hard} proves Theorem~\ref{thm:hard}, by a reduction from monotone not-all-equal 3-satisfiability with four occurrences per variable \cite{DD20}, and Corollary~\ref{cor:cov}, and Section~\ref{sec:fptas} proves Theorem~\ref{thm:fptas}. Section~\ref{sec:open} lists questions that remain open.
 
 \section{Energy as a distance}\label{sec:prelim}
 
-Fix a reference orientation of $G$ and let $N\in\R^{E\times V}$ be the incidence matrix, with $N_{e,u}=1$ and $N_{e,v}=-1$ for $e=(u,v)$. An orientation is a sign vector $s\in\{\pm1\}^E$, with $s_e=1$ when $e$ keeps its reference direction. Then $N^{\top}s=d^{\mathrm{out}}-d^{\mathrm{in}}$ and $N^{\top}N=\Delta$. Let $P=N\Delta^{+}N^{\top}$ be the orthogonal projection onto the space of tensions $\operatorname{im}N$, and let $C=I-P$, the projection onto the space of circulations $\ker N^{\top}$ of the introduction.
+Fix a reference orientation of $G$ and let $N\in\R^{E\times V}$ be the incidence matrix, with $N_{e,u}=1$ and $N_{e,v}=-1$ for $e=(u,v)$. An orientation is a sign vector $s\in\{\pm1\}^E$, with $s_e=1$ when $e$ keeps its reference direction. Then $N^{\top}s=d^{\mathrm{out}}-d^{\mathrm{in}}$ and $N^{\top}N=\Delta$. Let $\Delta^{+}$ be the Moore--Penrose pseudoinverse of $\Delta$, let $P=N\Delta^{+}N^{\top}$ be the orthogonal projection onto the space of tensions $\operatorname{im}N$, and let $C=I-P$, the projection onto the space of circulations $\ker N^{\top}$ of the introduction.
 
 \begin{lem}\label{lem:energy}
 For every orientation $s$, $E(s)=\|Ps\|^2=m-\|Cs\|^2$.
@@ -94,10 +99,10 @@ Let $G$ be bridgeless. The least energy over all orientations of $G$ is attained
 \end{lem}
 
 \begin{proof}[Proof of Lemma~\ref{lem:strong}]
-Let $s$ maximize $s^{\top}Cs$ over $\{\pm1\}^E$ and put $x=Cs$. Changing the sign of $s_e$ changes $s^{\top}Cs$ by $-4s_ex_e+4C_{ee}$, so $s_ex_e\ge C_{ee}$. Each edge $e$ lies on a cycle, of length $k\le m$ say, and the signed indicator vector of that cycle divided by $\sqrt k$ is a unit circulation with coordinate $\pm1/\sqrt k$ at $e$. Hence $C_{ee}=\|C\mathbf 1_e\|^2\ge1/k>0$. Thus $x$ is a circulation with $s_ex_e\ge C_{ee}>0$ for every edge, that is, a circulation that is positive on every arc of the orientation $s$. If that orientation were not strongly connected, some strongly connected component $X$ would have arcs leaving it and none entering it, and the net flow of $x$ out of $X$ would be positive, which is impossible for a circulation. By Lemma~\ref{lem:energy}, $s$ minimizes the energy over all orientations.
+Let $s$ maximize $s^{\top}Cs$ over $\{\pm1\}^E$ and put $x=Cs$. Changing the sign of $s_e$ changes $s^{\top}Cs$ by $-4s_ex_e+4C_{ee}$, so $s_ex_e\ge C_{ee}$. Each edge $e$ lies on a cycle, of length $c\le m$ say, and the signed indicator vector of that cycle divided by $\sqrt c$ is a unit circulation with coordinate $\pm1/\sqrt c$ at $e$. Hence $C_{ee}=\|C\mathbf 1_e\|^2\ge1/c>0$. Thus $x$ is a circulation with $s_ex_e\ge C_{ee}>0$ for every edge, that is, a circulation that is positive on every arc of the orientation $s$. If that orientation were not strongly connected, some strongly connected component $X$ would have arcs leaving it and none entering it, and the net flow of $x$ out of $X$ would be positive, which is impossible for a circulation. By Lemma~\ref{lem:energy}, $s$ minimizes the energy over all orientations.
 \end{proof}
 
-The support of a nonzero circulation has no vertex of degree one, so it contains a cycle; the signed indicator vector of a cycle has minimal support among nonzero circulations, because the support of a nonzero circulation is never a forest, so it is elementary in $\Lambda(G)$. So $\Lambda(G)$ is regular, and the theorem of Dutour Sikiri\'c, Sch\"urmann and Vallentin \cite[Theorem~2]{DSV09} shows that its Voronoi cell is $C([-1/2,1/2]^E)$, with vertices among the points $Cs/2$. For a strongly connected orientation $D$ with sign vector $s_D$, the point $Cs_D/2$ lies in the space of circulations and satisfies $2\langle Cs_D/2,\gamma\rangle=\langle s_D,\gamma\rangle=|\gamma|$ for the signed indicator vector $\gamma$ of every directed cycle of $D$, where $|\gamma|$ is the length of the cycle, which are the equations defining $v^D$ in \cite[Lemma~8]{Amini}; so $v^D=Cs_D/2$. The identity in Lemma~\ref{lem:strong} also follows from \cite[Theorem~2]{DSV09} and \cite[Lemma~8, Proposition~12]{Amini}.
+The support of a nonzero circulation has no vertex of degree one, so it contains a cycle; the signed indicator vector of a cycle has minimal support among nonzero circulations, because the support of a nonzero circulation is never a forest, so it is elementary in $\Lambda(G)$. So $\Lambda(G)$ is regular, and the theorem of Dutour Sikiri\'c, Sch\"urmann and Vallentin \cite[Theorem~2]{DSV09} shows that its Voronoi cell is $C([-1/2,1/2]^E)$, with vertices among the points $Cs/2$. For a strongly connected orientation $D$ with sign vector $s_D$, the point $Cs_D/2$ lies in the space of circulations and satisfies $2\langle Cs_D/2,\gamma\rangle=\langle s_D,\gamma\rangle=|\gamma|$ for the signed indicator vector $\gamma$ of every directed cycle of $D$, where $|\gamma|$ is the length of the cycle, which are the equations defining $v^D$ in \cite[Lemma~8]{Amini}; so $v^D=Cs_D/2$. The identity of Lemma~\ref{lem:strong} and Corollary~\ref{cor:radius} below is that of \cite[Theorem~2]{DSV09} together with \cite[Lemma~8, Proposition~12]{Amini}; the short proofs here fix the constant.
 
 \begin{cor}\label{cor:radius}
 The squared covering radius of $\Lambda(G)$ is the largest of the numbers $\|Cs\|^2/4$ with $s\in\{\pm1\}^E$. If $G$ is bridgeless with $m$ edges, it equals $(m-\Emin(G))/4$.
@@ -107,7 +112,7 @@ The squared covering radius of $\Lambda(G)$ is the largest of the numbers $\|Cs\
 The cell $C([-1/2,1/2]^E)$ contains every point $Cs/2$ and its vertices are among them, so the squared covering radius, the largest squared norm of a point of the cell, is $\max_s\|Cs\|^2/4$. For bridgeless $G$ this is $(m-\Emin(G))/4$ by Lemma~\ref{lem:strong}.
 \end{proof}
 
-The same value follows from \cite[\S4, Lemma~13]{Amini}. The vertex $v^D$ satisfies $2v^D_e-1=f_D(z)-f_D(y)$ on each arc $e=(y,z)$ of $D$, so its coordinates are $(f_D(z)-f_D(y)+1)/2$, and inserting them into Amini's identity $2\|v^D\|^2=\sum_ev^D_e$ gives $\|v^D\|^2=(m-E(D))/4$. Definition--Theorem~14 of \cite{Amini} states the squared covering radius as $(m-\Emin(G))/2$. For a cycle of length $n$ the value $(m-\Emin(G))/4$ is $n/4$, the squared distance from $\tfrac12(1,\dots,1)$ to the lattice $\Z(1,\dots,1)$.
+In the proof of \cite[Lemma~13]{Amini} the coordinate $v^D_e$ on an arc $e=(y,z)$ of $D$ is written $f_D(z)-f_D(y)+1$; with the value $(f_D(z)-f_D(y)+1)/2$ the same computation gives $\|v^D\|^2=(m-E(D))/4$, so \cite[Definition--Theorem~14]{Amini} holds with $1/4$ in place of $1/2$. For a cycle of length $n$ the value $(m-\Emin(G))/4$ is $n/4$, the squared distance from $\tfrac12(1,\dots,1)$ to the lattice $\Z(1,\dots,1)$.
 
 \begin{lem}\label{lem:lower}
 Let $G$ be bridgeless and let $v$ be a vertex of odd degree. Then $\Emin(G)\ge1/\deg(v)$.
@@ -124,7 +129,7 @@ If every degree is even, orienting the edges along a closed walk that uses each 
 The reduction has three steps. A not-all-equal formula is turned into a sum of fractions that can be signed to an integer exactly when the formula is satisfiable (Lemma~\ref{lem:signed}). Each fraction becomes a weighted triangle in the ring $G_0$, and the graph $H$ is a subdivided plane dual of $G_0$. Finally the least energy of $H$ is computed in closed form (Proposition~\ref{prop:ring}).
 
 \subsection{A signed sum}
-We reduce from monotone not-all-equal 3-satisfiability with exactly four occurrences per variable, \textsc{Monotone NAE-3-Sat-E4}: given clauses, each consisting of three distinct variables, with every variable in exactly four clauses and no negations, is there an assignment of the values $\pm1$ such that no clause has all three values equal? Darmann and D\"ocker proved that this problem is NP-complete \cite{DD20}, \cite[Theorem~1]{DD19}.
+We reduce from monotone not-all-equal 3-satisfiability with exactly four occurrences per variable, \textsc{Monotone NAE-3-Sat-E4}: given clauses, each consisting of three distinct variables, with every variable in exactly four clauses and no negations, is there an assignment of the values $\pm1$ such that no clause has all three values equal? Darmann and D\"ocker proved that this problem is NP-complete \cite{DD20}.
 
 Let the clauses be $c_1,\dots,c_q$. For each clause $c_j$ add a new variable $w_j$ occurring only in $c_j$. Three signs are not all equal exactly when a fourth sign can be chosen so that the four sum to zero, so the instance is a yes-instance if and only if there are signs for all variables such that every extended clause $c_j\cup\{w_j\}$ has sign sum $0$. Let $p_1<\dots<p_q$ be the first $q$ primes larger than $10$; they are at most the $(q+4)$-th prime, which is below $n(\log n+\log\log n)<n^2$ for $n=q+4\ge8$, with natural logarithms \cite{RS62}; here $q\ge4$, since every variable lies in four clauses. So each has at most $2\log_2(q+4)+1$ bits, and they can be listed by trial division in time polynomial in $q$. For every variable $i$ (original or new) put
 \[
@@ -144,7 +149,7 @@ Let $\tau_j(\sigma)$ be the sign sum of the extended clause $c_j\cup\{w_j\}$, so
 \end{proof}
 
 \subsection{The graph}
-Let $k$ be the number of variables, indexed cyclically by $i\in\Z/k\Z$. Build the ring $G_0$, a weighted plane graph: take vertices $u_1,\dots,u_k$ on a circle and, for each $i$, a triangle on $u_i,u_{i+1}$ and a new vertex $u'_i$, with the edge $u_iu_{i+1}$ (the \emph{inner} edge) of weight $2A_i$ and the edges $u_iu'_i$, $u'_iu_{i+1}$ (the \emph{outer} edges) of weight $2(B_i-2A_i)$ each. Draw the inner edges around a central face and the outer paths around the outer face. The faces of $G_0$ are the $k$ triangles, the central face and the outer face.
+Let $k$ be the number of variables, original and new, indexed cyclically by $i\in\Z/k\Z$. Build the ring $G_0$, a weighted plane graph: take vertices $u_1,\dots,u_k$ on a circle and, for each $i$, a triangle on $u_i,u_{i+1}$ and a new vertex $u'_i$, with the edge $u_iu_{i+1}$ (the \emph{inner} edge) of weight $2A_i$ and the edges $u_iu'_i$, $u'_iu_{i+1}$ (the \emph{outer} edges) of weight $2(B_i-2A_i)$ each. Draw the inner edges around a central face and the outer edges around the outer face. The faces of $G_0$ are the $k$ triangles, the central face and the outer face.
 
 Let $H$ be obtained from the plane dual of $G_0$ by replacing each dual edge, dual to a primal edge of weight $w$, by a path of $w$ edges. So $H$ has a vertex $o_{\mathrm{in}}$ for the central face, a vertex $o_{\mathrm{out}}$ for the outer face, a vertex $h_i$ for each triangle, a path of length $2A_i$ from $h_i$ to $o_{\mathrm{in}}$ and two paths of length $2(B_i-2A_i)$ from $h_i$ to $o_{\mathrm{out}}$. All weights are positive even integers bounded by $2p_q^4$, so $H$ has polynomial size; here the bounded number of occurrences matters.
 
@@ -153,39 +158,39 @@ The graph $H$ is planar, as a subdivision of a plane dual. It is simple because 
 \subsection{The least energy of \texorpdfstring{$H$}{H}}
 A circulation of $H$ is constant along each subdivided path, so circulations of $H$ correspond to circulations of the plane dual of $G_0$, and these correspond to tensions of $G_0$, that is, to vectors $(y_a-y_b)_{ab\in E(G_0)}$ for potentials $y\colon V(G_0)\to\R$ \cite[Chapter~14]{GR01}. A circulation corresponding to the tension $\delta$ has squared norm $\sum_ew_e\delta_e^2$ and $\ell^1$ norm $\sum_ew_e|\delta_e|$, where $w_e$ is the weight of $e$. By Lemma~\ref{lem:strong}, and since $\max_s\|Cs\|^2=\max_s\max_{\varphi}\bigl(2\langle s,\varphi\rangle-\|\varphi\|^2\bigr)=\max_\varphi\bigl(2\|\varphi\|_1-\|\varphi\|^2\bigr)$ with $\varphi$ ranging over circulations,
 \begin{equation}\label{eq:dual}
-\Emin(H)=W-4R^2,\qquad R^2=\max_{x\colon V(G_0)\to\R}\ \sum_{ab\in E(G_0)}w_{ab}\,g(x_a-x_b),
+\Emin(H)=W-4R^2,\qquad R^2=\max_{\theta\colon V(G_0)\to\R}\ \sum_{ab\in E(G_0)}w_{ab}\,g(\theta_a-\theta_b),
 \end{equation}
-where $g(\delta)=|\delta|-\delta^2$, after the substitution $y=2x$. By Corollary~\ref{cor:radius}, $R^2$ is the squared covering radius of $\Lambda(H)$.
+where $g(\delta)=|\delta|-\delta^2$, after the substitution $y=2\theta$. By Corollary~\ref{cor:radius}, $R^2$ is the squared covering radius of $\Lambda(H)$.
 
-Let $\hat g(\delta)=\{\delta\}(1-\{\delta\})$, where $\{\delta\}$ is the fractional part. Then $\hat g$ has period $1$, $\hat g=g$ on $(-1,1)$, and $g<0\le\hat g$ outside $[-1,1]$. Hence $g\le\hat g$, and for $x$ with values in $[0,1)$ every difference lies in $(-1,1)$. So $R^2$ is also the maximum of $\sum w_{ab}\hat g(x_a-x_b)$, a function of $x$ modulo $1$.
+Let $\hat g(\delta)=\{\delta\}(1-\{\delta\})$, where $\{\delta\}$ is the fractional part. Then $\hat g$ has period $1$, $\hat g=g$ on $(-1,1)$, and $g<0\le\hat g$ outside $[-1,1]$. Hence $g\le\hat g$, and for $\theta$ with values in $[0,1)$ every difference lies in $(-1,1)$. So $R^2$ is also the maximum of $\sum w_{ab}\hat g(x_a-x_b)$, a function of $\theta$ modulo $1$.
 
 \begin{lem}\label{lem:triangle}
 Let $0<A<B/2$ be integers, $a=A/B$ and $F=B-2A+A^2/B$. For $t\in\R$,
 \[
-\max_{z\in\R}\Bigl(2A\,\hat g(t)+2(B-2A)\bigl(\hat g(z)+\hat g(t-z)\bigr)\Bigr)=F-B\,\dist\bigl(t,\{a,-a\}+\Z\bigr)^2 .
+\max_{\zeta\in\R}\Bigl(2A\,\hat g(t)+2(B-2A)\bigl(\hat g(\zeta)+\hat g(t-\zeta)\bigr)\Bigr)=F-B\,\dist\bigl(t,\{a,-a\}+\Z\bigr)^2 .
 \]
 \end{lem}
 
 \begin{proof}
-Both sides have period $1$ and are even in $t$, so let $t\in[0,1/2]$. For $\alpha=\{z\}$ and $\beta=\{t-z\}$ we have $\alpha+\beta\in\{t,t+1\}$ and $\hat g(z)+\hat g(t-z)=(\alpha+\beta)-(\alpha^2+\beta^2)$, which for a fixed sum $\kappa=\alpha+\beta$ is at most $\kappa-\kappa^2/2$, with equality at $\alpha=\beta=\kappa/2$. Taking $\kappa=t$ or $\kappa=t+1$, the largest value is $\max(t,1/2)-t^2/2=1/2-t^2/2$ on $[0,1/2]$. The left side is therefore
+Both sides have period $1$ and are even in $t$, so let $t\in[0,1/2]$. For $\alpha=\{\zeta\}$ and $\beta=\{t-\zeta\}$ we have $\alpha+\beta\in\{t,t+1\}$ and $\hat g(\zeta)+\hat g(t-\zeta)=(\alpha+\beta)-(\alpha^2+\beta^2)$, which for a fixed sum $\kappa=\alpha+\beta$ is at most $\kappa-\kappa^2/2$, with equality at $\alpha=\beta=\kappa/2$. Taking $\kappa=t$ or $\kappa=t+1$, the largest value is $\max(t,1/2)-t^2/2=1/2-t^2/2$ on $[0,1/2]$. The left side is therefore
 \[
 2A(t-t^2)+(B-2A)(1-t^2)=(B-2A)+2At-Bt^2=F-B(t-a)^2 .
 \]
 For $t\in[0,1/2]$ the nearest point of $\{a,-a\}+\Z$ is $a$, since $a<1/2$.
 \end{proof}
 
-Let $F_i=B_i-2A_i+A_i^2/B_i$, $U=\sum_iF_i$ and $S=\sum_i1/B_i$.
+Let $F_i=B_i-2A_i+A_i^2/B_i$, so that $U=\sum_iF_i$, with $U$ and $S$ as in the introduction.
 
 \begin{prop}\label{prop:ring}
 $R^2=U-\rho^2/S$, hence $\Emin(H)=W-4U+4\rho^2/S$.
 \end{prop}
 
 \begin{proof}
-Maximize over the potentials of the $u'_i$ first. By Lemma~\ref{lem:triangle}, with $t_i=x_{u_{i+1}}-x_{u_i}$,
+Maximize over the potentials of the $u'_i$ first. By Lemma~\ref{lem:triangle}, with $t_i=\theta_{u_{i+1}}-\theta_{u_i}$,
 \[
 R^2=U-\min\Bigl\{\sum_iB_i\dist(t_i,\{\pm a_i\}+\Z)^2:\ \sum_it_i\in\Z\Bigr\},
 \]
-because the gaps around the circle $u_1,\dots,u_k$ can be any real numbers with integer sum (working modulo $1$). Write $t_i=\sigma_ia_i+n_i+\varepsilon_i$ with $\sigma_i=\pm1$, $n_i\in\Z$ and $|\varepsilon_i|$ the distance. Then $\sum_i\varepsilon_i\equiv-\sum_i\sigma_ia_i\pmod1$, so $|\sum_i\varepsilon_i|\ge \rho$, and by the Cauchy--Schwarz inequality $\bigl(\sum_i\varepsilon_i\bigr)^2\le S\sum_iB_i\varepsilon_i^2$. Thus the minimum is at least $\rho^2/S$. Choosing $\sigma$ that attains $\rho$, an integer $\nu$ at distance $\rho$ from $\sum\sigma_ia_i$, and $\varepsilon_i=(\nu-\sum_j\sigma_ja_j)/(B_iS)$ gives $\sum_iB_i\varepsilon_i^2=\rho^2/S$ with $\sum_it_i\in\Z$, and the distance from $t_i$ to $\{\pm a_i\}+\Z$ is at most $|\varepsilon_i|$. So the minimum is $\rho^2/S$. The formula for $\Emin(H)$ is \eqref{eq:dual}.
+because the differences $t_i$ around the circle $u_1,\dots,u_k$ can be any real numbers with integer sum (working modulo $1$). Write $t_i=\sigma_ia_i+n_i+\eta_i$ with $\sigma_i=\pm1$, $n_i\in\Z$ and $|\eta_i|$ the distance. Then $\sum_i\eta_i\equiv-\sum_i\sigma_ia_i\pmod1$, so $|\sum_i\eta_i|\ge \rho$, and by the Cauchy--Schwarz inequality $\bigl(\sum_i\eta_i\bigr)^2\le S\sum_iB_i\eta_i^2$. Thus the minimum is at least $\rho^2/S$. Choosing $\sigma$ that attains $\rho$, an integer $\nu$ at distance $\rho$ from $\sum\sigma_ia_i$, and $\eta_i=(\nu-\sum_j\sigma_ja_j)/(B_iS)$ gives $\sum_iB_i\eta_i^2=\rho^2/S$ with $\sum_it_i\in\Z$, and the distance from $t_i$ to $\{\pm a_i\}+\Z$ is at most $|\eta_i|$. So the minimum is $\rho^2/S$. The formula for $\Emin(H)$ is \eqref{eq:dual}.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:hard}]
@@ -193,7 +198,7 @@ The problem is in NP: a strongly connected orientation can be checked by two sea
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:cov}]
-By Corollary~\ref{cor:radius} the squared covering radius of $\Lambda(G)$ is the largest of the numbers $\|Cs\|^2/4$. A sign vector $s$ with $\|Cs\|^2/4>r$ certifies a no-instance and is checked by one rational linear solve, so the problem is in coNP. For the instance $(H,r_0)$ of the proof of Theorem~\ref{thm:hard}, with gap $\gamma=4/(Q^2S)$, put $r=(W-r_0-\gamma/2)/4$. The squared covering radius of $\Lambda(H)$ is at most $r$ exactly when $\Emin(H)\ge r_0+\gamma/2$, that is, for a no-instance of the formula. This reduces the complement of an NP-complete problem to ours. For a plane multigraph $G$ the circulation space of $G$ is the tension space of its plane dual $G^*$ under the natural bijection of edges \cite[Chapter~14]{GR01}, so $\Lambda(G)$ is isometric to the lattice of integer cuts of $G^*$. Lattices of integer cuts are regular \cite[Lemma~1(i)]{DSV09}, so by \cite[Theorem~2]{DSV09} the squared covering radius of the lattice of integer cuts of $G$ is the largest of the numbers $\|Ps\|^2/4$, and the same certificate shows that the problem for them is in coNP.
+By Corollary~\ref{cor:radius} the squared covering radius of $\Lambda(G)$ is the largest of the numbers $\|Cs\|^2/4$. A sign vector $s$ with $\|Cs\|^2/4>r$ certifies a no-instance and is checked by one rational linear solve, so the problem is in coNP. For the instance $(H,r_0)$ of the proof of Theorem~\ref{thm:hard}, put $r=(W-r_0-2/(Q^2S))/4$. The squared covering radius of $\Lambda(H)$ is at most $r$ exactly when $\Emin(H)\ge r_0+2/(Q^2S)$, that is, for a no-instance of the formula. This reduces the complement of an NP-complete problem to ours. For a plane multigraph $G$ the circulation space of $G$ is the tension space of its plane dual $G^*$ under the natural bijection of edges \cite[Chapter~14]{GR01}, so $\Lambda(G)$ is isometric to the lattice of integer cuts of $G^*$. Lattices of integer cuts are regular \cite[Lemma~1(i)]{DSV09}, so by \cite[Theorem~2]{DSV09} the squared covering radius of the lattice of integer cuts of $G$ is the largest of the numbers $\|Ps\|^2/4$, and the same certificate shows that the problem for them is in coNP. Taking $G=H$, whose plane dual $H^*$ is a planar multigraph, the lattice of integer cuts of $H^*$ is isometric to $\Lambda(H)$, so the problem is coNP-hard for lattices of integer cuts of planar multigraphs. This is the hardness anticipated after \cite[Proposition~3]{DSV09}.
 \end{proof}
 
 \begin{ex}\label{ex:small}
@@ -218,7 +223,7 @@ using $m/K^2\le\varepsilon/m\le\varepsilon M$. Hence an optimal $z'$ for $J$ giv
 It remains to compute $J$ and an optimal $z'$. Compute a tree decomposition of width at most $\omega$ in linear time \cite{Bodlaender96}. Assign every edge to one bag containing both ends, and process the decomposition from the leaves, keeping for each bag a table indexed by the vector of net flows out of its vertices from the edges assigned so far, each entry the least partial cost $\sum(|z'_e|-K)^2$ together with a witness. An edge is introduced by trying the $2T$ values of $z'_e$; a vertex is forgotten only with net flow $0$; the tables of the children of a bag are combined one at a time by adding the vectors of net flows and the costs. Every net flow lies in $[-mT,mT]$, so each table has at most $(2mT+1)^{\omega+1}$ entries and each step takes time polynomial in $m$ and $(2mT+1)^{\omega+1}$. At the root the entry with all net flows $0$ is $K^2J$. Since $T\le 2m^{3/2}/\sqrt\varepsilon+3\sqrt m$, the total time is polynomial in $m$ and $1/\varepsilon$ for fixed $\omega$.
 \end{proof}
 
-In Theorem~\ref{thm:hard} the gap is $4/(Q^2S)$ while $\Emin(H)\le W$, so separating the two cases with Theorem~\ref{thm:fptas} would need $\varepsilon$ of order $1/(Q^2SW)$, exponentially small in the size of the formula.
+In Theorem~\ref{thm:hard} the gap is $4/(Q^2S)$, while $r_0=W-4U=\sum_i2A_i(1-2A_i/B_i)$ lies between $6k/11$ and $W$; the guarantee of Theorem~\ref{thm:fptas} separates the two cases only when $\varepsilon<4/(Q^2Sr_0)$, which is exponentially small in the size of the formula.
 
 \section{Open questions}\label{sec:open}
 
@@ -258,7 +263,6 @@ The AI agents Claude (Anthropic) and Codex (OpenAI), working through Math Brain~
 \bibitem{CV10} L.~Caporaso and F.~Viviani, Torelli theorem for graphs and tropical curves, \emph{Duke Math. J.} \textbf{153} (2010), 129--171, \doi{10.1215/00127094-2010-022}.
 \bibitem{DL22} Z.~Dancso and J.~Lim, Lattice of integer flows and the poset of strongly connected orientations for regular matroids, \emph{Discrete Math.} \textbf{346} (2023), 113589, \doi{10.1016/j.disc.2023.113589}; arXiv:2202.13265.
 \bibitem{DD20} A.~Darmann and J.~D\"ocker, On a simple hard variant of Not-All-Equal 3-Sat, \emph{Theoret. Comput. Sci.} \textbf{815} (2020), 147--152, \doi{10.1016/j.tcs.2020.02.010}.
-\bibitem{DD19} A.~Darmann and J.~D\"ocker, On simplified NP-complete variants of Not-All-Equal 3-Sat and 3-Sat, preprint, 2019, arXiv:1908.04198.
 \bibitem{DSV09} M.~Dutour Sikiri\'c, A.~Sch\"urmann and F.~Vallentin, Complexity and algorithms for computing Voronoi cells of lattices, \emph{Math. Comp.} \textbf{78} (2009), 1713--1731, \doi{10.1090/S0025-5718-09-02224-8}.
 \bibitem{GR01} C.~Godsil and G.~Royle, \emph{Algebraic Graph Theory}, Graduate Texts in Mathematics 207, Springer, New York, 2001.
 \bibitem{MPSV21} S.~T. McCormick, B.~Peis, R.~Scheidweiler and F.~Vallentin, A polynomial time algorithm for solving the closest vector problem in zonotopal lattices, \emph{SIAM J. Discrete Math.} \textbf{35} (2021), 2345--2356, \doi{10.1137/20M1382258}.

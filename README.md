@@ -2,13 +2,14 @@
 
 Yitzchak Shmalo
 
-For an orientation of a graph, let $f$ solve $\Delta f=d^{\mathrm{out}}-d^{\mathrm{in}}$; the energy of the orientation is
-$\langle f,\Delta f\rangle$. Amini showed that the squared covering radius of the lattice of integer flows is an affine
-function of the least energy of a strongly connected orientation, and asked whether that least energy can be computed in
-polynomial time. Deciding whether it is at most a given rational number is NP-complete, even on simple bipartite planar
-graphs that become a tree after one vertex is deleted, so deciding whether the squared covering radius of the lattice of
-integer flows (or of integer cuts) is at most a given number is coNP-complete. At bounded treewidth the least energy has a
-fully polynomial-time approximation scheme.
+For an orientation of a finite graph, let $f$ solve $\Delta f=d^{\mathrm{out}}-d^{\mathrm{in}}$ and call $\langle
+f,\Delta f\rangle$ the energy of the orientation. Amini showed that the covering radius of the lattice of integer flows
+is determined by the least energy of a strongly connected orientation, and wrote that the complexity of finding such an
+orientation is unknown and that he suspected it to be NP-hard. We show that the decision version is NP-complete, even
+for simple bipartite planar graphs that become a tree after one vertex is deleted. Hence deciding whether the squared
+covering radius of the lattice of integer flows is at most a given rational number is coNP-complete, and the same holds
+for lattices of integer cuts. On graphs of bounded treewidth the least energy has a fully polynomial-time approximation
+scheme.
 
 `main.tex` and `main.pdf` are the paper. `check_triangle_ring.py` uses only Python's standard library and computes the
 values of Example 3.4 from the definition of the energy, in exact rational arithmetic:
